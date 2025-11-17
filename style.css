@@ -251,7 +251,7 @@ header div {
   align-items: center;
   text-decoration: none;
   color: #fff;
-  max-width: 180px;        /* optional: prevent too wide */
+  max-width: 160px;        /* optional: prevent too wide */
   justify-content: center;
   transition: transform 0.3s;
 }
