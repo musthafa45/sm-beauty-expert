@@ -71,21 +71,14 @@ Party Makeup
 
   </div>
 </section>
-
-
-
     <section class="hero widget">
       <h2>Our Work with Clients</h2>
-      <div class="swiper mySwiper">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide"><img src="images/1.jpg" alt="work 1"></div>
-          <div class="swiper-slide"><img src="images/2.jpg" alt="work 2"></div>
-          <div class="swiper-slide"><img src="images/3.jpg" alt="work 3"></div>
-          <div class="swiper-slide"><img src="images/4.jpg" alt="work 4"></div>
-          <div class="swiper-slide"><img src="images/5.jpg" alt="work 5"></div>
-        </div>
-      </div>
-
+  <div class="swiper mySwiper">
+  <div class="swiper-wrapper" id="workGallery"></div>
+ </div>
+ <div class="video-container">
+  <video id="showcaseVideo" width="100%" autoplay muted playsinline></video>
+</div>
       <div class="location">
         <svg viewBox="0 0 24 24">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
@@ -116,24 +109,35 @@ Party Makeup
     </div>
   </div>
 </footer>
-
-
   </div>
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
-  <script>
-   const swiper = new Swiper('.mySwiper', {
-  loop: true,
-  effect: 'fade',
-  fadeEffect: { crossFade: true },
-  autoplay: { delay: 2500, disableOnInteraction: false },
-  slidesPerView: 1,
-  speed: 1000,
-  centeredSlides: true,
-});
+    <!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
-  </script>
+<!-- Your auto-image code -->
+<script src="main.js"></script>
 
-  
+<script>
+  const videos = [
+    "videos/1.mp4",
+    "videos/2.mp4",
+    "videos/3.mp4",
+    "videos/4.mp4"
+  ];
+
+  let currentVideo = 0;
+  const player = document.getElementById("showcaseVideo");
+
+  // Load first video
+  player.src = videos[currentVideo];
+
+  // When one video ends, load the next
+  player.addEventListener("ended", () => {
+    currentVideo = (currentVideo + 1) % videos.length; // loop back
+    player.src = videos[currentVideo];
+    player.play();
+  });
+</script>
+
+
 </body>
 </html>
