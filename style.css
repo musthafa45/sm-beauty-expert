@@ -242,6 +242,26 @@ header div {
   transition: transform 0.3s, background 0.3s;
 }
 
+.contact-buttons a.instagram-btn {
+  background: linear-gradient(135deg, #C13584, #E1306C);
+  padding: 12px 15px;       /* smaller padding */
+  font-size: 14px;         /* smaller font if needed */
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  max-width: 180px;        /* optional: prevent too wide */
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.contact-buttons a.instagram-btn:hover {
+  transform: scale(1.05);
+}
+
+
+
 .contact-buttons a:hover {
    transform: scale(1.05);
   background: linear-gradient(135deg, #20b957, #198e47);
