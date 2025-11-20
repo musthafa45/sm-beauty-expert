@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>SM Beauty Expert</title>
+  
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+  .google-btn, .submit-btn { padding:10px 20px; margin-top:10px; cursor:pointer; }
+  .review-box { display:flex; gap:10px; margin-bottom:15px; }
+  .avatar { width:40px; height:40px; border-radius:50%; object-fit:cover; }
+  .stars label { cursor:pointer; font-size:20px; margin-right:5px; }
+  .stars input { display:none; }
+</style>
+
+</head>
+<body>
+  <div class="container">
+
+    <header>
+  <img src="images/logo.png" alt="SM Beauty Expert Logo" class="logo">
+  <h1>Beauty Expert</h1>
+  <div>Professional Makeup Services — Tamilnadu</div>
+</header>
+
+    <section class="services widget">
+  <h2>Our Services</h2>
+  <div class="services-grid">
+<div class="service-card">
+  <i class="fa-solid fa-person-dress"></i>
+  Hair Styles
+</div>
+
+<div class="service-card">
+  <i class="fa-solid fa-wand-magic-sparkles"></i>
+  HD Bridal Makeup
+</div>
+
+<div class="service-card">
+  <i class="fa-solid fa-sun"></i>
+Party Makeup
+</div>
+
+<div class="service-card">
+  <i class="fa-solid fa-palette"></i>
+  Mehandi
+</div>
+
+<div class="service-card">
+  <i class="fa-solid fa-gem"></i>
+  Jewell Set Rent
+</div>
+
+<div class="service-card">
+  <i class="fa-solid fa-seedling"></i>
+  Bridal Flowers
+</div>
+
+<div class="service-card">
+  <i class="fa-solid fa-camera"></i>
+  Photoshoot Makeup
+</div>
+
+<div class="service-card">
+  <i class="fa-solid fa-person-dress-burst"></i>
+  Saree Draping
+</div>
+
+<div class="service-card">
+  <i class="fa-solid fa-spa"></i>
+  Facials
+</div>
+
+  </div>
+</section>
+    <section class="hero widget">
+      <h2>Our Work with Clients</h2>
+  <div class="swiper mySwiper">
+  <div class="swiper-wrapper" id="workGallery"></div>
+ </div>
+ <div class="video-container">
+  <video id="showcaseVideo" width="100%" autoplay muted playsinline></video>
+</div>
+      <div class="location">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+        </svg>
+        Available in Tamilnadu, India
+      </div>
+    </section>
+<section class="reviews widget">
+  <h2>Client Reviews</h2>
+
+  <div class="review-card"> <!-- <-- make the whole card -->
+    <h3>Leave a Review</h3>
+    <div class="stars">
+      <span data-star="1">★</span>
+      <span data-star="2">★</span>
+      <span data-star="3">★</span>
+      <span data-star="4">★</span>
+      <span data-star="5">★</span>
+    </div>
+    <textarea id="review-text" placeholder="Write your comment (optional)..."></textarea>
+    <button id="submit-review" disabled>Submit Review</button>
+  </div>
+
+  <!-- THIS IS CRUCIAL -->
+  <div id="reviewsList"></div>
+</section>
+
+
+
+<footer>
+  <div class="contact-card">
+    <div class="contact-title">For Booking via WhatsApp:</div>
+    <div class="contact-buttons">
+      <a href="https://wa.me/917092085364" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle; margin-right:6px; fill:#fff;">
+          <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.48 2.53.74 3.88.74a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.25 2.67.74 3.88a1 1 0 01-.21 1.11l-2.41 2.41z"/>
+        </svg>
+        +91 70920 85364
+      </a>
+      <a href="https://wa.me/916379757039" target="_blank">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" style="vertical-align:middle; margin-right:6px; fill:#fff;">
+          <path d="M6.62 10.79a15.053 15.053 0 006.59 6.59l2.2-2.2a1 1 0 011.11-.21c1.21.48 2.53.74 3.88.74a1 1 0 011 1v3.5a1 1 0 01-1 1C10.07 21 3 13.93 3 5a1 1 0 011-1h3.5a1 1 0 011 1c0 1.35.25 2.67.74 3.88a1 1 0 01-.21 1.11l-2.41 2.41z"/>
+        </svg>
+        +91 63797 57039
+      </a>
+      <a href="https://instagram.com/makeup_artist_masoo" target="_blank" class="instagram-btn">
+  <i class="fab fa-instagram" style="margin-right:6px;"></i>
+  @makeup_artist_masoo
+</a>
+
+    </div>
+    <div class="copyright">
+      &copy; 2025 SM Beauty Expert. All rights reserved.
+    </div>
+  </div>
+</footer>
+  </div>
+
+<!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<script src="main.js"></script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+
+// -------------------- Firebase Setup --------------------
+const firebaseConfig = {
+  apiKey: "AIzaSyByZAyiwg39lpNSCLlSf75Zkvy6cXPzgFY",
+  authDomain: "sm-beauty-expert.firebaseapp.com",
+  projectId: "sm-beauty-expert",
+  storageBucket: "sm-beauty-expert.appspot.com",
+  messagingSenderId: "1072782234764",
+  appId: "1:1072782234764:web:480869aa98442a32d017a9",
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const provider = new GoogleAuthProvider();
+
+// -------------------- Stars Rating --------------------
+const stars = document.querySelectorAll(".stars span");
+const submitBtn = document.getElementById("submit-review");
+let selectedRating = 0;
+
+stars.forEach(star => {
+  star.addEventListener("mouseover", () => {
+    const val = Number(star.dataset.star);
+    stars.forEach(s => s.classList.toggle("hover", Number(s.dataset.star) <= val));
+  });
+
+  star.addEventListener("mouseout", () => {
+    stars.forEach(s => s.classList.remove("hover"));
+    highlightStars(selectedRating);
+  });
+
+  star.addEventListener("click", () => {
+    selectedRating = Number(star.dataset.star);
+    highlightStars(selectedRating);
+
+    if (selectedRating > 0) {
+      submitBtn.disabled = false;
+      submitBtn.classList.add("enabled");
+    }
+  });
+});
+
+function highlightStars(rating) {
+  stars.forEach(s => s.classList.toggle("active", Number(s.dataset.star) <= rating));
+}
+
+// -------------------- Google Login --------------------
+async function loginWithGoogle() {
+  const result = await signInWithPopup(auth, provider);
+  return result.user;
+}
+
+// -------------------- Add Review to UI --------------------
+function addReviewToUI(name, photo, rating, comment) {
+  const reviewsList = document.getElementById("reviewsList");
+  const reviewBox = document.createElement("div");
+  reviewBox.className = "review-box";
+  reviewBox.innerHTML = `
+    <img src="${photo || 'images/default-avatar.png'}" class="avatar"/>
+    <div>
+      <strong>${name}</strong><br>
+      ⭐ ${rating}/5<br>
+      <p>${comment || ''}</p>
+    </div>
+  `;
+  reviewsList.prepend(reviewBox);
+}
+
+// -------------------- Submit Review --------------------
+submitBtn.addEventListener("click", async () => {
+  if (!selectedRating) return alert("Select rating");
+
+  let user = auth.currentUser;
+  if (!user) user = await loginWithGoogle();
+
+  const comment = document.getElementById("review-text").value;
+
+  const reviewData = {
+    uid: user.uid,
+    name: user.displayName,
+    photo: user.photoURL,
+    rating: selectedRating,
+    comment: comment,
+  };
+
+  const res = await fetch("http://localhost:4000/add-review", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(reviewData),
+  });
+
+  const result = await res.json();
+  if (result.success) {
+    addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
+  }
+});
+
+
+//-------------------- Load Reviews --------------------
+async function loadReviews() {
+  const res = await fetch("http://localhost:4000/reviews");
+  const data = await res.json();
+
+  const list = document.getElementById("reviewsList");
+  list.innerHTML = "";
+
+  data.forEach(r => {
+    addReviewToUI(r.name, r.photo, r.rating, r.comment);
+  });
+}
+
+window.addEventListener("DOMContentLoaded", loadReviews);
+</script>
+
+</body>
+</html>

@@ -1,0 +1,370 @@
+/* General */
+body {
+   font-family: 'Inter', system-ui, Arial;
+  margin: 0;
+  color: #333;
+  background: url("images/bg.jpg") no-repeat center center fixed;
+  background-size: cover;
+  position: relative; /* needed for overlay */
+}
+
+body::before {
+  content: "";
+  position: fixed; /* cover entire screen */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 182, 193, 0.4); /* pink overlay, adjust alpha */
+  z-index: 0;
+  pointer-events: none;
+}
+
+section.widget {
+  margin: 24px 0; /* uniform spacing top & bottom */
+}
+
+
+/* make all content above overlay */
+.container, header, .services, .hero, .contact-card {
+  position: relative;
+  z-index: 1;
+}
+
+.container {
+  max-width: 980px;
+  margin: 24px auto;
+  padding: 16px;
+}
+header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+header h1 {
+  font-family: 'Great Vibes', cursive;
+  font-size: 55px;
+  color: #d63f7e; /* stronger pink for impact */
+}
+header div {
+  font-size: 14px;
+  color: #6b4c63; /* muted plum color */
+}
+.services {
+  text-align: center;
+}
+
+.services h2 {
+  margin-bottom: 16px;
+  font-size: 22px;
+  color: #111;
+}
+.services h2, .hero h2 {
+  position: relative;
+  display: inline-block;
+  padding-bottom: 6px;
+}
+.services h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
+  height: 2px;
+  background: #ff6f61;
+  border-radius: 4px;
+}
+.hero h2::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 30%;
+  height: 2px;
+  background: #ff6f61;
+  border-radius: 4px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 16px;
+}
+
+.service-card {
+  display: flex;
+  padding: 20px;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff0f5, #ffe4f0); /* soft pink gradient */
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  font-weight: 600;
+  color: #4b2c3a; /* dark plum for readability */
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  font-size: 17px;
+}
+
+
+.service-card i {
+   font-size: 24px;
+  background: linear-gradient(45deg, #d63f7e, #ff87b9);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+}
+
+
+/* Hero / Portfolio */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.widget {
+  background: linear-gradient(145deg, #ffe4f0, #fff0f5);
+  padding: 24px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  border: 1px solid rgba(255, 182, 193, 0.4);
+  backdrop-filter: blur(6px);
+  border-radius: 22px;
+  justify-content: center;
+  align-items: center;
+}
+.hero h2 {
+  text-align: center;
+  margin-bottom: 16px;
+  color: #333;
+}
+
+/* Swiper */
+/* Swiper container */
+.swiper {
+  width: 100%;
+  max-width: 500px; /* adjust as needed */
+  height: 300px;
+  overflow: hidden;
+  margin: 16px 0;
+  border-radius: 18px;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 300px;
+}
+
+
+.swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto; /* center horizontally */
+  border-radius: 15px; /* soft corners, match container */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.video-container {
+  margin: 20px auto;
+  width: 100%;
+  max-width: 300px; /* smaller than before */
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.video-container video {
+  width: 100%;
+  height: auto; /* maintain aspect ratio */
+  display: block;
+}
+
+/* Location */
+.location {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #555;
+}
+.location svg {
+  width: 20px;
+  height: 20px;
+  fill: #ff6f61;
+}
+
+.stars {
+  margin-top: -25px;
+}
+
+.reviews h3 {
+  font-family: Arial, sans-serif; /* simple font */
+  font-size: 22px;
+  color: #000000; 
+  text-align: left; 
+  margin-bottom: 12px;
+  font-weight: 600;
+  padding-left: 10px;
+}
+
+.review-card {
+  background: linear-gradient(145deg, #fff0f5, #ffe4f0); /* soft pink gradient */
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 30px auto; /* space around the card */
+  box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  transition: transform 0.2s;
+}
+
+/* Hover effect on card */
+.review-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Stars */
+.stars span {
+  font-size: 44px;
+  cursor: pointer;
+  color: #ccc;
+  transition: 0.2s;
+}
+
+
+.stars span.active {
+  color: gold;
+}
+
+/* Textarea */
+#review-text {
+  width: 100%;
+  padding: 5px;            /* more padding for comfort */
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  min-height: 60px;          /* taller for better typing */
+  resize: none;
+  font-size: 16px;           /* bigger text */
+  line-height: 1.4;          /* spacing between lines */
+  font-family: Arial, sans-serif; /* simple, readable */
+}
+
+/* Default button */
+#submit-review {
+  padding: 12px;
+  border-radius: 8px;
+  border: none;
+  background: #333;
+  color: #fff;
+  font-weight: bold;
+  cursor: not-allowed; /* default disabled */
+  transition: all 0.2s ease;
+  font-size: 18px;
+}
+
+/* Enabled state */
+#submit-review.enabled {
+  background: #ff6b00;
+  cursor: pointer;
+}
+
+#submit-review.enabled:hover {
+  background: #ff8b33;
+}
+
+/* Click animation */
+#submit-review.enabled:active {
+  transform: scale(0.95);   /* button shrinks slightly */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2); /* small shadow on click */
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+
+/* Footer / Contact */
+.contact-card {
+ background: linear-gradient(145deg, #ffe4f0, #fff0f5);
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 8px 26px rgba(0,0,0,0.1);
+  text-align: center;
+  max-width: 980px;
+  margin: 50px auto 36px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid rgba(255, 182, 193, 0.4);
+}
+
+
+.contact-title {
+  font-weight: 600;
+  color: #6b2e55;
+  font-size: 16px;
+}
+
+.contact-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.contact-buttons a {
+  padding: 12px 20px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #25d366, #1eb851);
+  color: #fff;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.contact-buttons a.instagram-btn {
+  background: linear-gradient(135deg, #C13584, #E1306C);
+  padding: 12px 15px;       /* smaller padding */
+  font-size: 14px;         /* smaller font if needed */
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: #fff;
+  max-width: 160px;        /* optional: prevent too wide */
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.contact-buttons a.instagram-btn:hover {
+  transform: scale(1.05);
+}
+
+
+
+.contact-buttons a:hover {
+   transform: scale(1.05);
+  background: linear-gradient(135deg, #20b957, #198e47);
+}
+
+.copyright {
+  font-size: 12px;
+  color: #6b4c63;
+}
+
+@media (max-width: 500px) {
+  .video-container {
+    max-width: 300px;
+  }
+}
