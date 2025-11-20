@@ -296,6 +296,42 @@ async function loginWithGoogle() {
 // }
 
 // window.addEventListener("DOMContentLoaded", loadReviews);
+const BASE_URL = "https://script.google.com/macros/s/AKfycbxK9lZ0AY4663RvtV3FSzRdUmqNQh2juJ8sjgfX0pn2POTxsnsM_szgtYlmEE4gZZjT/exec";
+
+async function loadReviews() {
+  const res = await fetch(BASE_URL);
+  const data = await res.json();
+  const list = document.getElementById("reviewsList");
+  list.innerHTML = "";
+  data.forEach(r => addReviewToUI(r.name, r.photo, r.rating, r.comment));
+}
+
+// Submit review
+submitBtn.addEventListener("click", async () => {
+  if (!selectedRating) return alert("Select rating");
+
+  let user = auth.currentUser;
+  if (!user) user = await loginWithGoogle();
+
+  const comment = document.getElementById("review-text").value;
+
+  const reviewData = {
+    uid: user.uid,
+    name: user.displayName,
+    photo: user.photoURL,
+    rating: selectedRating,
+    comment: comment,
+  };
+
+  const res = await fetch(BASE_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(reviewData),
+  });
+
+  const result = await res.json();
+  if (result.success) addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
+});
 </script>
 
 </body>
