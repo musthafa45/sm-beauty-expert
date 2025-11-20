@@ -1,7 +1,6 @@
 // TOTAL images
 const totalImages = 15;
 const wrapper = document.getElementById("workGallery");
-const BASE_URL = "https://sm-beauty-backend.onrender.com";
 
 // Add image slides
 for (let i = 1; i <= totalImages; i++) {

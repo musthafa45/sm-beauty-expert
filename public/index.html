@@ -239,7 +239,7 @@ submitBtn.addEventListener("click", async () => {
     comment: comment,
   };
 
-  const res = await fetch("https://sm-beauty-backend.onrender.com/reviews", {
+  const res = await fetch("https://sm-beauty-expert.onrender.com/reviews", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(reviewData),
@@ -254,7 +254,7 @@ submitBtn.addEventListener("click", async () => {
 
 //-------------------- Load Reviews --------------------
 async function loadReviews() {
-  const res = await fetch("https://sm-beauty-backend.onrender.com/reviews");
+  const res = await fetch("https://sm-beauty-expert.onrender.com/reviews");
   const data = await res.json();
 
   const list = document.getElementById("reviewsList");
