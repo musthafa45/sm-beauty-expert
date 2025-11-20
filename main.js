@@ -1,4 +1,3 @@
-// TOTAL images
 const totalImages = 15;
 const wrapper = document.getElementById("workGallery");
 

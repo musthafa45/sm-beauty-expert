@@ -143,6 +143,36 @@ Party Makeup
     </div>
   </div>
 </footer>
+
+ </div>
+    <!-- Swiper JS -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+
+<!-- Your auto-image code -->
+<script src="main.js"></script>
+
+<script>
+  const videos = [
+    "videos/1.mp4",
+    "videos/2.mp4",
+    "videos/3.mp4",
+    "videos/4.mp4"
+  ];
+
+  let currentVideo = 0;
+  const player = document.getElementById("showcaseVideo");
+
+  // Load first video
+  player.src = videos[currentVideo];
+
+  // When one video ends, load the next
+  player.addEventListener("ended", () => {
+    currentVideo = (currentVideo + 1) % videos.length; // loop back
+    player.src = videos[currentVideo];
+    player.play();
+  });
+</script>
+
   </div>
 
 <!-- Swiper JS -->
