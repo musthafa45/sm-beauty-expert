@@ -236,7 +236,7 @@ async function loginWithGoogle() {
   return result.user;
 }
 
-const BASE_URL = "https://script.google.com/macros/s/AKfycbwleWOzf6WlXTZsCuSfjpYXQ40UOUm3BbCodrYy45dXeGbOPVuoOWqzoBG2B9QJxRCx/exec";
+const BASE_URL = "https://script.google.com/macros/s/AKfycbyWlDdm0SOx6n2walVjKiO0rhAmpHLCw6oMUxLoxN_ZV6Xyj_Q7pdBsOnZO59Qz588x/exec";
 
 async function loadReviews() {
   const res = await fetch(BASE_URL);
@@ -265,9 +265,11 @@ submitBtn.addEventListener("click", async () => {
 
   const res = await fetch(BASE_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+    "Content-Type": "text/plain;charset=utf-8"   // IMPORTANT!!!
+  },
     body: JSON.stringify(reviewData),
-  });
+  });  
 
   const result = await res.json();
   if (result.success) addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
