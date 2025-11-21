@@ -291,6 +291,25 @@ leftDiv.style.display = "flex";
 leftDiv.style.alignItems = "center";
 leftDiv.style.gap = "10px";
 
+// Date
+const dateDiv = document.createElement("span");
+if (timestamp) {
+  const dateObj = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
+  dateDiv.textContent = dateObj.toLocaleDateString("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric"
+  });
+  dateDiv.style.fontSize = "14px";
+  dateDiv.style.color = "#888";
+
+  // Add spacing when wrapped
+  dateDiv.style.marginTop = "5px"; // small space on wrap
+}
+
+// Append to header
+header.appendChild(leftDiv);
+header.appendChild(dateDiv);
 
 function addReviewToUI(name, photo, rating, comment, timestamp) {
   const list = document.getElementById("reviewsList");
