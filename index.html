@@ -183,6 +183,8 @@ Party Makeup
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
 
 
 // -------------------- Firebase Setup --------------------
@@ -198,6 +200,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const provider = new GoogleAuthProvider();
+const db = getFirestore(app);
 
 // -------------------- Stars Rating --------------------
 const stars = document.querySelectorAll(".stars span");
@@ -235,16 +238,19 @@ async function loginWithGoogle() {
   const result = await signInWithPopup(auth, provider);
   return result.user;
 }
-
-const BASE_URL = "https://script.google.com/macros/s/AKfycbwLFq5XMjW3eIwURG_OJ1uThCIUhxWFHmIyEDJWcPjJDW1z4bFMBQrqFlE9E8szAYd6/exec";
-
+// -------------------- Reviews Handling --------------------
 async function loadReviews() {
-  const res = await fetch(BASE_URL);
-  const data = await res.json();
   const list = document.getElementById("reviewsList");
   list.innerHTML = "";
-  data.forEach(r => addReviewToUI(r.name, r.photo, r.rating, r.comment));
+
+  const querySnapshot = await getDocs(collection(db, "reviews"));
+
+  querySnapshot.forEach(doc => {
+    const r = doc.data();
+    addReviewToUI(r.name, r.photo, r.rating, r.comment);
+  });
 }
+
 
 // Submit review
 submitBtn.addEventListener("click", async () => {
@@ -255,28 +261,20 @@ submitBtn.addEventListener("click", async () => {
 
   const comment = document.getElementById("review-text").value;
 
-  const reviewData = {
+  await addDoc(collection(db, "reviews"), {
+    timestamp: new Date(),
     uid: user.uid,
     name: user.displayName,
     photo: user.photoURL,
     rating: selectedRating,
-    comment: comment,
-  };
+    comment: comment
+  });
 
-  const res = await fetch(BASE_URL, {
-    method: "POST",
-    headers: {
-    "Content-Type": "text/plain;charset=utf-8"   // IMPORTANT!!!
-  },
-    body: JSON.stringify(reviewData),
-  });  
-
-  // const result = await res.json();
-  // if (result.success) addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
-  // You CANNOT do res.json() here (no response allowed)
-alert("Review submitted!");
-addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
+  alert("Review submitted!");
+  addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
 });
+
+loadReviews();
 </script>
 
 </body>
