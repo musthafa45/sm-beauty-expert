@@ -302,23 +302,38 @@ header div {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  word-wrap: break-word;       /* wrap long words */
+  overflow-wrap: anywhere;      /* wrap anywhere if needed */
 }
 
 .review-photo {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  flex-shrink: 0;               /* don't shrink avatar */
 }
 
 .review-stars span {
   color: gold;
-  font-size: 30px;
+  font-size: 25px;              /* smaller stars to fit */
 }
 
 .review-comment {
-  font-size: 20px;
+  font-size: 16px;              /* slightly smaller for long text */
   color: #444;
+  white-space: pre-wrap;        /* keep line breaks */
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
 }
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;              /* wrap name + date if needed */
+}
+
 
 
 /* Footer / Contact */

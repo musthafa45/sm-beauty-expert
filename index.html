@@ -184,6 +184,7 @@ Party Makeup
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 import { getFirestore, collection, addDoc, getDocs } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+import { doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
 
 
@@ -246,11 +247,10 @@ async function loadReviews() {
   const querySnapshot = await getDocs(collection(db, "reviews"));
 
   querySnapshot.forEach(doc => {
-    const r = doc.data();
-    addReviewToUI(r.name, r.photo, r.rating, r.comment);
+  const r = doc.data();
+  addReviewToUI(r.name, r.photo, r.rating, r.comment, r.timestamp);
   });
 }
-
 
 // Submit review
 submitBtn.addEventListener("click", async () => {
@@ -261,32 +261,52 @@ submitBtn.addEventListener("click", async () => {
 
   const comment = document.getElementById("review-text").value;
 
-  await addDoc(collection(db, "reviews"), {
+  // Use user's UID as the document ID (1 account = 1 doc)
+  const reviewRef = doc(db, "reviews", user.uid);
+
+  await setDoc(reviewRef, {
     timestamp: new Date(),
     uid: user.uid,
     name: user.displayName,
     photo: user.photoURL,
     rating: selectedRating,
     comment: comment
-  });
+  }, { merge: true }); // merge true allows updating existing review
 
   alert("Review submitted!");
-  addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
+  // Reload all reviews to reflect changes
+  loadReviews();
 });
 
 loadReviews();
 
-function addReviewToUI(name, photo, rating, comment) {
+// Header with photo, name, and date
+const header = document.createElement("div");
+header.className = "review-header";
+
+const leftDiv = document.createElement("div");
+leftDiv.style.display = "flex";
+leftDiv.style.alignItems = "center";
+leftDiv.style.gap = "10px";
+
+
+function addReviewToUI(name, photo, rating, comment, timestamp) {
   const list = document.getElementById("reviewsList");
 
   const reviewItem = document.createElement("div");
   reviewItem.className = "review-item";
 
-  // Header with photo and name
+  // Header with photo, name, and date
   const header = document.createElement("div");
   header.style.display = "flex";
   header.style.alignItems = "center";
-  header.style.gap = "10px"; // small gap
+  header.style.justifyContent = "space-between"; // name left, date right
+  header.style.gap = "10px";
+
+  const leftDiv = document.createElement("div");
+  leftDiv.style.display = "flex";
+  leftDiv.style.alignItems = "center";
+  leftDiv.style.gap = "10px";
 
   const img = document.createElement("img");
   img.src = photo || "images/default-avatar.png"; // fallback if no photo
@@ -296,8 +316,24 @@ function addReviewToUI(name, photo, rating, comment) {
   const reviewerName = document.createElement("strong");
   reviewerName.textContent = name;
 
-  header.appendChild(img);
-  header.appendChild(reviewerName);
+  leftDiv.appendChild(img);
+  leftDiv.appendChild(reviewerName);
+
+  // Date
+  const dateDiv = document.createElement("span");
+  if (timestamp) {
+    const dateObj = timestamp.toDate ? timestamp.toDate() : new Date(timestamp); // Firestore timestamp
+    dateDiv.textContent = dateObj.toLocaleDateString("en-IN", {
+      day: "numeric",
+      month: "short",
+      year: "numeric"
+    });
+    dateDiv.style.fontSize = "14px";
+    dateDiv.style.color = "#888";
+  }
+
+  header.appendChild(leftDiv);
+  header.appendChild(dateDiv);
 
   // Stars
   const starsDiv = document.createElement("div");
@@ -322,6 +358,7 @@ function addReviewToUI(name, photo, rating, comment) {
 
   list.prepend(reviewItem); // show newest first
 }
+
 
 
 </script>
