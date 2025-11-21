@@ -279,42 +279,50 @@ loadReviews();
 function addReviewToUI(name, photo, rating, comment) {
   const list = document.getElementById("reviewsList");
 
-  // Create review container
   const reviewItem = document.createElement("div");
   reviewItem.className = "review-item";
 
-  // User image
+  // Header with photo and name
+  const header = document.createElement("div");
+  header.style.display = "flex";
+  header.style.alignItems = "center";
+  header.style.gap = "10px"; // small gap
+
   const img = document.createElement("img");
-  img.src = photo || "https://i.postimg.cc/4N0Q0m4Z/user.png"; // fallback avatar
+  img.src = photo || "images/default-avatar.png"; // fallback if no photo
+  img.alt = name;
   img.className = "review-photo";
 
-  // Name
-  const userName = document.createElement("h4");
-  userName.textContent = name || "Anonymous";
+  const reviewerName = document.createElement("strong");
+  reviewerName.textContent = name;
+
+  header.appendChild(img);
+  header.appendChild(reviewerName);
 
   // Stars
-  const starContainer = document.createElement("div");
-  starContainer.className = "review-stars";
-
+  const starsDiv = document.createElement("div");
+  starsDiv.className = "review-stars";
+  starsDiv.style.display = "flex";
+  starsDiv.style.gap = "2px"; // tighter gap
   for (let i = 1; i <= 5; i++) {
     const star = document.createElement("span");
-    star.innerHTML = i <= rating ? "★" : "☆";
-    starContainer.appendChild(star);
+    star.textContent = "★";
+    star.style.color = i <= rating ? "gold" : "#ccc";
+    starsDiv.appendChild(star);
   }
 
   // Comment
-  const userComment = document.createElement("p");
-  userComment.className = "review-comment";
-  userComment.textContent = comment;
+  const commentDiv = document.createElement("div");
+  commentDiv.className = "review-comment";
+  commentDiv.textContent = comment;
 
-  // Append all
-  reviewItem.appendChild(img);
-  reviewItem.appendChild(userName);
-  reviewItem.appendChild(starContainer);
-  reviewItem.appendChild(userComment);
+  reviewItem.appendChild(header);
+  reviewItem.appendChild(starsDiv);
+  reviewItem.appendChild(commentDiv);
 
-  list.prepend(reviewItem); // newest first
+  list.prepend(reviewItem); // show newest first
 }
+
 
 </script>
 

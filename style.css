@@ -312,14 +312,13 @@ header div {
 
 .review-stars span {
   color: gold;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .review-comment {
-  font-size: 14px;
+  font-size: 20px;
   color: #444;
 }
-
 
 
 /* Footer / Contact */
