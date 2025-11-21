@@ -19,3 +19,23 @@
     centeredSlides: true,
   });
 })();
+
+const toggleBtn = document.getElementById("toggleReviews");
+const reviewsContainer = document.getElementById("reviewsContainer");
+
+toggleBtn.addEventListener("click", () => {
+  if (reviewsContainer.style.display === "none") {
+    reviewsContainer.style.display = "block";
+    toggleBtn.textContent = "Client Reviews ▲"; // arrow changes
+  } else {
+    reviewsContainer.style.display = "none";
+    toggleBtn.textContent = "Client Reviews ▼";
+  }
+});
+
+toggleBtn.addEventListener("click", () => {
+  reviewsContainer.classList.toggle("open");
+  toggleBtn.textContent = reviewsContainer.classList.contains("open")
+    ? "Client Reviews ▲"
+    : "Client Reviews ▼";
+});

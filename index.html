@@ -95,24 +95,26 @@ Party Makeup
       </div>
     </section>
 <section class="reviews widget">
-  <h2>Client Reviews</h2>
+  <h2 style="cursor:pointer;" id="toggleReviews">Client Reviews ▼</h2>
 
-  <div class="review-card"> <!-- <-- make the whole card -->
-    <h3>Leave a Review</h3>
-    <div class="stars">
-      <span data-star="1">★</span>
-      <span data-star="2">★</span>
-      <span data-star="3">★</span>
-      <span data-star="4">★</span>
-      <span data-star="5">★</span>
+  <div id="reviewsContainer" style="display:none; transition: all 0.3s ease;">
+    <div class="review-card"> 
+      <h3>Leave a Review</h3>
+      <div class="stars">
+        <span data-star="1">★</span>
+        <span data-star="2">★</span>
+        <span data-star="3">★</span>
+        <span data-star="4">★</span>
+        <span data-star="5">★</span>
+      </div>
+      <textarea id="review-text" placeholder="Write your comment (optional)..."></textarea>
+      <button id="submit-review" disabled>Submit Review</button>
     </div>
-    <textarea id="review-text" placeholder="Write your comment (optional)..."></textarea>
-    <button id="submit-review" disabled>Submit Review</button>
-  </div>
 
-  <!-- THIS IS CRUCIAL -->
-  <div id="reviewsList"></div>
+    <div id="reviewsList"></div>
+  </div>
 </section>
+
 
 
 
@@ -273,7 +275,7 @@ submitBtn.addEventListener("click", async () => {
     comment: comment
   }, { merge: true }); // merge true allows updating existing review
 
-  alert("Review submitted!");
+  //alert("Review submitted!");
   // Reload all reviews to reflect changes
   loadReviews();
 });
@@ -295,26 +297,35 @@ function addReviewToUI(name, photo, rating, comment, timestamp) {
 
   const reviewItem = document.createElement("div");
   reviewItem.className = "review-item";
+  reviewItem.style.background = "#fff0f5"; // light pink
+  reviewItem.style.padding = "15px";
+  reviewItem.style.marginBottom = "15px";
+  reviewItem.style.borderRadius = "12px";
+  reviewItem.style.boxShadow = "0 2px 8px rgba(0,0,0,0.1)";
+  reviewItem.style.display = "flex";
+  reviewItem.style.flexDirection = "column";
+  reviewItem.style.gap = "8px";
 
-  // Header with photo, name, and date
+  // Header: left (photo + name), right (date)
   const header = document.createElement("div");
   header.style.display = "flex";
   header.style.alignItems = "center";
   header.style.justifyContent = "space-between"; // name left, date right
-  header.style.gap = "10px";
+  header.style.flexWrap = "wrap"; // wrap if small screens
 
   const leftDiv = document.createElement("div");
   leftDiv.style.display = "flex";
   leftDiv.style.alignItems = "center";
-  leftDiv.style.gap = "10px";
+  leftDiv.style.gap = "8px";
 
   const img = document.createElement("img");
-  img.src = photo || "images/default-avatar.png"; // fallback if no photo
+  img.src = photo || "images/default-avatar.png";
   img.alt = name;
   img.className = "review-photo";
 
   const reviewerName = document.createElement("strong");
   reviewerName.textContent = name;
+  reviewerName.style.color = "#333"; // dark text for contrast
 
   leftDiv.appendChild(img);
   leftDiv.appendChild(reviewerName);
@@ -322,7 +333,7 @@ function addReviewToUI(name, photo, rating, comment, timestamp) {
   // Date
   const dateDiv = document.createElement("span");
   if (timestamp) {
-    const dateObj = timestamp.toDate ? timestamp.toDate() : new Date(timestamp); // Firestore timestamp
+    const dateObj = timestamp.toDate ? timestamp.toDate() : new Date(timestamp);
     dateDiv.textContent = dateObj.toLocaleDateString("en-IN", {
       day: "numeric",
       month: "short",
@@ -339,7 +350,7 @@ function addReviewToUI(name, photo, rating, comment, timestamp) {
   const starsDiv = document.createElement("div");
   starsDiv.className = "review-stars";
   starsDiv.style.display = "flex";
-  starsDiv.style.gap = "2px"; // tighter gap
+  starsDiv.style.gap = "2px";
   for (let i = 1; i <= 5; i++) {
     const star = document.createElement("span");
     star.textContent = "★";
@@ -351,13 +362,18 @@ function addReviewToUI(name, photo, rating, comment, timestamp) {
   const commentDiv = document.createElement("div");
   commentDiv.className = "review-comment";
   commentDiv.textContent = comment;
+  commentDiv.style.wordWrap = "break-word"; // wrap long text
+  commentDiv.style.whiteSpace = "pre-wrap";  // preserve line breaks
+  commentDiv.style.color = "#444";
 
   reviewItem.appendChild(header);
   reviewItem.appendChild(starsDiv);
   reviewItem.appendChild(commentDiv);
 
-  list.prepend(reviewItem); // show newest first
+  list.prepend(reviewItem); // newest first
 }
+
+
 
 
 

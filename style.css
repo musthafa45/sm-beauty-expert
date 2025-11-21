@@ -220,7 +220,7 @@ header div {
 }
 
 .review-card {
-  background: linear-gradient(145deg, #fff0f5, #ffe4f0); /* soft pink gradient */
+  background:  #fff0f5; /* soft pink gradient */
   padding: 20px;
   border-radius: 12px;
   max-width: 700px;
@@ -334,6 +334,14 @@ header div {
   flex-wrap: wrap;              /* wrap name + date if needed */
 }
 
+#reviewsContainer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 1s ease;
+}
+#reviewsContainer.open {
+  max-height: 1000px; /* enough to show content */
+}
 
 
 /* Footer / Contact */
