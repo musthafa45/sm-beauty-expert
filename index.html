@@ -271,8 +271,11 @@ submitBtn.addEventListener("click", async () => {
     body: JSON.stringify(reviewData),
   });  
 
-  const result = await res.json();
-  if (result.success) addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
+  // const result = await res.json();
+  // if (result.success) addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
+  // You CANNOT do res.json() here (no response allowed)
+alert("Review submitted!");
+addReviewToUI(user.displayName, user.photoURL, selectedRating, comment);
 });
 </script>
 
